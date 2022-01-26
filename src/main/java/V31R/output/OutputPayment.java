@@ -14,7 +14,11 @@ public class OutputPayment {
 
     public static void output(Payment payment){
 
-        System.out.printf("%s %s\n",payment.getCurrency(), payment.getSum());
+        if(Double.compare(payment.getSum(),0)!=0) {
+
+            System.out.printf("%s %s\n", payment.getCurrency(), payment.getSum());
+
+        }
 
     }
 
