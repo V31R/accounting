@@ -1,6 +1,7 @@
 package V31R.output;
 
 import V31R.payment.Payment;
+import V31R.payment.PaymentDAO;
 
 import java.util.Map;
 
@@ -14,15 +15,20 @@ public class OutputPayment {
 
     public static void output(Payment payment){
 
-        if(Double.compare(payment.getSum(),0)!=0) {
-
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(payment.getCurrency())
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(payment.getCurrency())
                     .append(" ")
                     .append(payment.getSum());
-            Output.println(stringBuilder.toString());
+        Output.println(stringBuilder.toString());
 
-        }
+    }
+
+    public static void output(PaymentDAO paymentDAO){
+
+        paymentDAO.getPayments()
+                .stream()
+                .filter((p)->Double.compare(p.getValue(), 0.d)!=0)
+                .forEach((p)->OutputPayment.output(p));
 
     }
 

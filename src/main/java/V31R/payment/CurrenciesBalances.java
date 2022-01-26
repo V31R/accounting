@@ -2,11 +2,10 @@ package V31R.payment;
 
 import V31R.output.OutputPayment;
 
-import java.io.*;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Scanner;
+import java.util.Set;
+import java.util.stream.Stream;
 
 
 public class CurrenciesBalances implements  PaymentDAO{
@@ -35,11 +34,11 @@ public class CurrenciesBalances implements  PaymentDAO{
     }
 
     @Override
-    public void outputCurrent() {
+    public Set<Map.Entry<String,Double>> getPayments(){
 
-        balancies.entrySet()
-                .forEach((p)->OutputPayment.output(p));
+        return balancies.entrySet();
 
     }
+
 
 }

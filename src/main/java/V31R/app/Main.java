@@ -53,7 +53,7 @@ public class Main {
 
             }
             currenciesBalances.addPayment(payment);
-            currenciesBalances.outputCurrent();
+            OutputPayment.output(currenciesBalances);
 
         }
     }
