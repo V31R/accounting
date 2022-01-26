@@ -13,21 +13,14 @@ public class CurrenciesBalances implements  PaymentDAO{
 
     private Map<String, Double> balancies = new HashMap<String, Double>();
 
-    public void loadCurrencies(String currenciesFilename) throws FileNotFoundException, IOException {
-
-        InputStream fileInputStream = new FileInputStream(currenciesFilename);
-        balancies.clear();
-        Scanner inputStream = new Scanner(fileInputStream);
-        while(inputStream.hasNext()){
-            String currency=inputStream.next().trim().toUpperCase(Locale.ROOT);
-            balancies.put(currency, 0.d);
-        }
-        fileInputStream.close();
-
-    }
-
     @Override
     public void addPayment(Payment payment) {
+
+        if(payment==null){
+
+            return;
+
+        }
 
         if(balancies.containsKey(payment.getCurrency())){
 

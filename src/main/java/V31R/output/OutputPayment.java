@@ -16,7 +16,11 @@ public class OutputPayment {
 
         if(Double.compare(payment.getSum(),0)!=0) {
 
-            System.out.printf("%s %s\n", payment.getCurrency(), payment.getSum());
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(payment.getCurrency())
+                    .append(" ")
+                    .append(payment.getSum());
+            Output.println(stringBuilder.toString());
 
         }
 
