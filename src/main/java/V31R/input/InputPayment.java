@@ -1,5 +1,6 @@
 package V31R.input;
 
+import V31R.exception.PaymentFormatException;
 import V31R.exception.QuitException;
 import V31R.output.Output;
 import V31R.payment.Payment;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 
 public class InputPayment {
 
-    public static Payment input() throws QuitException, Exception {
+    public static Payment input() throws QuitException, PaymentFormatException {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -25,7 +26,7 @@ public class InputPayment {
 
     }
 
-    public static Payment input(Scanner scanner) throws Exception {
+    public static Payment input(Scanner scanner) throws PaymentFormatException {
 
         String currency = scanner.next().toUpperCase(Locale.ROOT).trim();
 
@@ -33,11 +34,11 @@ public class InputPayment {
 
     }
 
-    protected static Payment inputPayment(Scanner scanner, String currency) throws Exception{
+    protected static Payment inputPayment(Scanner scanner, String currency) throws PaymentFormatException{
 
         if(!PaymentDAOFactory.getInstance().isCurrencyAvailable(currency)){
 
-            throw new Exception(
+            throw new PaymentFormatException(
                     (new StringBuilder()).append("Currency \"")
                             .append(currency)
                             .append("\" isn't available.")

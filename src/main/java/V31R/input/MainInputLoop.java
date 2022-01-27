@@ -1,5 +1,6 @@
 package V31R.input;
 
+import V31R.exception.PaymentFormatException;
 import V31R.exception.QuitException;
 import V31R.output.Output;
 import V31R.output.OutputPayment;
@@ -92,15 +93,9 @@ public class MainInputLoop {
                 isWork=false;
 
             }
-            catch (IOException ioException){
+            catch(PaymentFormatException paymentFormatException){
 
-                Output.println("Something go wrong :(");
-                isWork=false;
-
-            }
-            catch(Exception exception){
-
-                Output.println(exception.getMessage());
+                Output.println(paymentFormatException.getMessage());
 
             }
             paymentDAO.addPayment(payment);
