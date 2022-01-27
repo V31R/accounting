@@ -2,6 +2,7 @@ package V31R.app;
 
 import V31R.exception.QuitException;
 import V31R.input.InputPayment;
+import V31R.input.MainInputLoop;
 import V31R.output.Output;
 import V31R.output.OutputPayment;
 import V31R.payment.CurrenciesBalances;
@@ -14,48 +15,9 @@ public class Main {
 
     static public void main(String[] argv){
 
-        CurrenciesBalances currenciesBalances = new CurrenciesBalances();
-        try {
+        MainInputLoop mainInputLoop = new MainInputLoop();
+        mainInputLoop.run();
 
-            PaymentDAOFactory.getInstance().loadCurrencies("currencies.txt");
-            PaymentDAOFactory.getInstance().setDAO(currenciesBalances);
-
-        }
-        catch (Exception exception){
-
-            Output.println(exception.getMessage());
-            return;
-
-        }
-        while(true) {
-
-            Output.println("Enter payment");
-            Payment payment=null;
-            try {
-
-                payment = InputPayment.input();
-
-            }
-            catch(QuitException quitException){
-
-                break;
-
-            }
-            catch (IOException ioException){
-
-                Output.println("Something go wrong :(");
-                break;
-
-            }
-            catch(Exception exception){
-
-                Output.println(exception.getMessage());
-
-            }
-            currenciesBalances.addPayment(payment);
-            OutputPayment.output(currenciesBalances);
-
-        }
     }
 
 

@@ -1,11 +1,8 @@
 package V31R.payment;
 
-import V31R.output.OutputPayment;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Stream;
 
 
 public class CurrenciesBalances implements  PaymentDAO{

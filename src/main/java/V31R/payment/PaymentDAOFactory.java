@@ -1,10 +1,7 @@
 package V31R.payment;
 
-import V31R.output.Output;
-
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Scanner;

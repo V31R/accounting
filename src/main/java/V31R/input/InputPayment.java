@@ -12,14 +12,28 @@ public class InputPayment {
 
     public static Payment input() throws QuitException, Exception {
 
-        Scanner inputStream = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        String currency = inputStream.next().toUpperCase(Locale.ROOT).trim();
+        String currency = scanner.next().toUpperCase(Locale.ROOT).trim();
         if(currency.equals("QUIT")){
 
             throw new QuitException();
 
         }
+
+       return inputPayment(scanner,currency);
+
+    }
+
+    public static Payment input(Scanner scanner) throws Exception {
+
+        String currency = scanner.next().toUpperCase(Locale.ROOT).trim();
+
+        return inputPayment(scanner,currency);
+
+    }
+
+    protected static Payment inputPayment(Scanner scanner, String currency) throws Exception{
 
         if(!PaymentDAOFactory.getInstance().isCurrencyAvailable(currency)){
 
@@ -33,11 +47,11 @@ public class InputPayment {
         }
 
         Double sum = 0.d;
-        if (inputStream.hasNext()){
+        if (scanner.hasNext()){
 
             try {
 
-                sum = inputStream.nextDouble();
+                sum = scanner.nextDouble();
 
             }catch(Exception exception){
 
