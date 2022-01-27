@@ -2,14 +2,11 @@ package V31R.payment;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class PaymentDAOFactory {
 
-    private Set<String> currencies;
+    private Map<String, Double> currencies;
     private static PaymentDAOFactory instance;
 
     private boolean loaded;
@@ -17,7 +14,7 @@ public class PaymentDAOFactory {
     private PaymentDAOFactory(){
 
         loaded = false;
-        currencies = new HashSet<>();
+        currencies = new HashMap<>();
 
     }
 
@@ -37,9 +34,33 @@ public class PaymentDAOFactory {
 
         Scanner inputStream = new Scanner(new FileInputStream(filename));
 
+        String last=inputStream.next().trim().toUpperCase(Locale.ROOT);
         while (inputStream.hasNext()) {
 
-            currencies.add(inputStream.next().trim().toUpperCase(Locale.ROOT));
+            String in =inputStream.next().trim();
+
+            try{
+
+                Double rate=Double.valueOf(in);
+                currencies.put(last.toUpperCase(Locale.ROOT), rate);
+
+
+            }
+            catch(Exception exception){
+
+                if(!currencies.containsKey(last)) {
+
+                    currencies.put(last, null);
+
+                }
+                last=in.toUpperCase(Locale.ROOT);
+
+            }
+
+        }
+        if(!currencies.containsKey(last)) {
+
+            currencies.put(last, null);
 
         }
 
@@ -55,19 +76,23 @@ public class PaymentDAOFactory {
 
         }
 
-        Payment defaultPayment = new Payment("",0.d);
-        for (String currency:currencies) {
+        currencies.entrySet()
+                .forEach(
+                        (p)-> paymentDAO.addPayment(new Payment(p.getKey(), 0.d))
+                );
 
-            defaultPayment.setCurrency(currency);
-            paymentDAO.addPayment(defaultPayment);
-
-        }
 
     }
 
     public boolean isCurrencyAvailable(String currency){
 
-        return currencies.contains(currency);
+        return currencies.containsKey(currency);
+
+    }
+
+    public Double getCurrencyRate(String currency){
+
+        return currencies.get(currency);
 
     }
 

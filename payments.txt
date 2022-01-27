@@ -1,3 +1,5 @@
 usd 123
 UsD -100
 RUB 1000000
+cny 100
+btc 1

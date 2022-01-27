@@ -1,3 +1,5 @@
 usd
+CNY 0.16
 rub
-bitcoin
+btc 36969.30
+

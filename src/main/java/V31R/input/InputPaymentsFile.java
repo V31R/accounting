@@ -5,7 +5,6 @@ import V31R.payment.PaymentDAO;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class InputPaymentsFile {

@@ -11,6 +11,7 @@ import V31R.payment.PaymentDAOFactory;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class MainInputLoop {
@@ -26,8 +27,8 @@ public class MainInputLoop {
     protected void start(PaymentDAO paymentDAO){
 
         Scanner scanner = new Scanner(System.in);
-        String first = scanner.next();
-        if(first.equals("file")){
+        String first = scanner.next().trim().toUpperCase(Locale.ROOT);
+        if(first.equals("FILE")){
             try {
 
                 InputPaymentsFile.loadFile(scanner.next(), paymentDAO);
