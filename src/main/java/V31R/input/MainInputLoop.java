@@ -39,7 +39,13 @@ public class MainInputLoop {
 
             }
 
-        }else{
+        }
+        else if(first.equals("RUN")){
+
+            return;
+
+        }
+        else{
 
             try {
 
@@ -63,26 +69,30 @@ public class MainInputLoop {
 
     }
 
-    public void run(){
+    protected  void outputLoop(){
 
-        try {
+        while(true){
 
-            load("currencies.txt");
+            OutputPayment.output(paymentDAO);
+
+            try {
+                Thread.sleep(60000);
+            }
+            catch(Exception exception){
+
+                continue;
+
+            }
 
         }
-        catch (Exception exception){
 
-            Output.println(exception.getMessage());
-            return;
+    }
 
-        }
-
-        start(paymentDAO);
+    protected void loop(){
 
         boolean isWork = true;
         while(isWork) {
 
-            Output.println("Enter payment");
             Payment payment=null;
             try {
 
@@ -99,11 +109,35 @@ public class MainInputLoop {
                 Output.println(paymentFormatException.getMessage());
 
             }
+
             paymentDAO.addPayment(payment);
-            OutputPayment.output(paymentDAO);
 
         }
 
+    }
+
+    public void run(){
+
+        try {
+
+            load("currencies.txt");
+
+        }
+        catch (Exception exception){
+
+            Output.println(exception.getMessage());
+            return;
+
+        }
+
+        start(paymentDAO);
+
+        Thread outputThread = new Thread(()->outputLoop());
+        outputThread.setDaemon(true);
+        outputThread.setName("Output-balance-thread");
+        outputThread.start();
+
+        loop();
 
     }
 
