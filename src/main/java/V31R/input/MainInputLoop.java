@@ -27,7 +27,7 @@ public class MainInputLoop {
     protected void start(PaymentDAO paymentDAO){
 
         Scanner scanner = new Scanner(System.in);
-        String first = scanner.next().trim().toUpperCase(Locale.ROOT);
+        String first = scanner.next().toUpperCase(Locale.ROOT);
         if(first.equals("FILE")){
             try {
 

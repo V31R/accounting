@@ -7,6 +7,7 @@ import V31R.output.Output;
 import V31R.payment.Payment;
 import V31R.payment.PaymentDAOFactory;
 
+import java.math.BigDecimal;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class InputPayment {
 
         Scanner scanner = new Scanner(System.in);
 
-        String currency = scanner.next().toUpperCase(Locale.ROOT).trim();
+        String currency = scanner.next().toUpperCase(Locale.ROOT);
         if(currency.equals("QUIT")){
 
             throw new QuitException();
@@ -29,7 +30,7 @@ public class InputPayment {
 
     public static Payment input(Scanner scanner) throws PaymentFormatException {
 
-        String currency = scanner.next().toUpperCase(Locale.ROOT).trim();
+        String currency = scanner.next().toUpperCase(Locale.ROOT);
 
         return inputPayment(scanner,currency);
 
@@ -48,12 +49,12 @@ public class InputPayment {
 
         }
 
-        Double sum = 0.d;
+        BigDecimal sum = BigDecimal.valueOf(0);
         if (scanner.hasNext()){
 
             try {
 
-                sum = scanner.nextDouble();
+                sum = scanner.nextBigDecimal();
 
             }catch(Exception exception){
 

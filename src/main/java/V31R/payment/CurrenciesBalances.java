@@ -1,5 +1,6 @@
 package V31R.payment;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -7,7 +8,7 @@ import java.util.Set;
 
 public class CurrenciesBalances implements  PaymentDAO{
 
-    private Map<String, Double> balancies = new HashMap<String, Double>();
+    private Map<String, BigDecimal> balancies = new HashMap<>();
 
     @Override
     public void addPayment(Payment payment) {
@@ -20,7 +21,7 @@ public class CurrenciesBalances implements  PaymentDAO{
 
         if(balancies.containsKey(payment.getCurrency())){
 
-            balancies.replace(payment.getCurrency(),Double.sum( balancies.get(payment.getCurrency()), payment.getSum()));
+            balancies.replace(payment.getCurrency(),balancies.get(payment.getCurrency()).add(payment.getSum()));
 
         }else{
 
@@ -31,7 +32,7 @@ public class CurrenciesBalances implements  PaymentDAO{
     }
 
     @Override
-    public Set<Map.Entry<String,Double>> getPayments(){
+    public Set<Map.Entry<String, BigDecimal>> getPayments(){
 
         return balancies.entrySet();
 

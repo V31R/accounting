@@ -2,11 +2,12 @@ package V31R.payment;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 
 public class PaymentDAOFactory {
 
-    private Map<String, Double> currencies;
+    private Map<String, BigDecimal> currencies;
     private static PaymentDAOFactory instance;
 
     private boolean loaded;
@@ -14,7 +15,7 @@ public class PaymentDAOFactory {
     private PaymentDAOFactory(){
 
         loaded = false;
-        currencies = new HashMap<>();
+        currencies = new HashMap<String, BigDecimal>();
 
     }
 
@@ -41,7 +42,7 @@ public class PaymentDAOFactory {
 
             try{
 
-                Double rate=Double.valueOf(in);
+                BigDecimal rate=new BigDecimal(in);
                 currencies.put(last.toUpperCase(Locale.ROOT), rate);
 
 
@@ -78,7 +79,7 @@ public class PaymentDAOFactory {
 
         currencies.entrySet()
                 .forEach(
-                        (p)-> paymentDAO.addPayment(new Payment(p.getKey(), 0.d))
+                        (p)-> paymentDAO.addPayment(new Payment(p.getKey(), BigDecimal.valueOf(0)))
                 );
 
 
@@ -90,7 +91,7 @@ public class PaymentDAOFactory {
 
     }
 
-    public Double getCurrencyRate(String currency){
+    public BigDecimal getCurrencyRate(String currency){
 
         return currencies.get(currency);
 
