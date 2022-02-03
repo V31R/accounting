@@ -8,6 +8,8 @@ import java.util.Set;
 
 public class CurrenciesBalances implements  PaymentDAO{
 
+    private Object lock = new Object();
+
     private Map<String, BigDecimal> balancies = new HashMap<>();
 
     @Override
@@ -19,13 +21,17 @@ public class CurrenciesBalances implements  PaymentDAO{
 
         }
 
-        if(balancies.containsKey(payment.getCurrency())){
+        synchronized (lock) {
 
-            balancies.replace(payment.getCurrency(),balancies.get(payment.getCurrency()).add(payment.getSum()));
+            if (balancies.containsKey(payment.getCurrency())) {
 
-        }else{
+                balancies.replace(payment.getCurrency(), balancies.get(payment.getCurrency()).add(payment.getSum()));
 
-            balancies.put(payment.getCurrency(),payment.getSum());
+            } else {
+
+                balancies.put(payment.getCurrency(), payment.getSum());
+
+            }
 
         }
 
@@ -34,7 +40,11 @@ public class CurrenciesBalances implements  PaymentDAO{
     @Override
     public Set<Map.Entry<String, BigDecimal>> getPayments(){
 
-        return balancies.entrySet();
+        synchronized (lock) {
+
+            return balancies.entrySet();
+
+        }
 
     }
 

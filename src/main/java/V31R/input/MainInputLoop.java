@@ -1,7 +1,6 @@
 package V31R.input;
 
 import V31R.exception.PaymentFormatException;
-import V31R.exception.QuitException;
 import V31R.output.Output;
 import V31R.output.OutputPayment;
 import V31R.payment.CurrenciesBalances;
@@ -98,10 +97,11 @@ public class MainInputLoop {
 
                 payment = InputPayment.input();
 
-            }
-            catch(QuitException quitException){
+                if(payment == null){
 
-                isWork=false;
+                    isWork=false;
+
+                }
 
             }
             catch(PaymentFormatException paymentFormatException){

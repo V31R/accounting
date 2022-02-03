@@ -1,7 +1,6 @@
 package V31R.input;
 
 import V31R.exception.PaymentFormatException;
-import V31R.exception.QuitException;
 
 import V31R.output.Output;
 import V31R.payment.Payment;
@@ -13,14 +12,14 @@ import java.util.Scanner;
 
 public class InputPayment {
 
-    public static Payment input() throws QuitException, PaymentFormatException {
+    public static Payment input() throws  PaymentFormatException {
 
         Scanner scanner = new Scanner(System.in);
 
         String currency = scanner.next().toUpperCase(Locale.ROOT);
         if(currency.equals("QUIT")){
 
-            throw new QuitException();
+            return null;
 
         }
 
