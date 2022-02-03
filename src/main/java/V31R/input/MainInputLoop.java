@@ -23,7 +23,7 @@ public class MainInputLoop {
 
     }
 
-    protected void start(PaymentDAO paymentDAO){
+    private void start(PaymentDAO paymentDAO){
 
         Scanner scanner = new Scanner(System.in);
         String first = scanner.next().toUpperCase(Locale.ROOT);
@@ -61,14 +61,14 @@ public class MainInputLoop {
 
     }
 
-    protected void load(String currenciesFilename) throws IOException, Exception {
+    private void load(String currenciesFilename) throws IOException, Exception {
 
         PaymentDAOFactory.getInstance().loadCurrencies(currenciesFilename);
         PaymentDAOFactory.getInstance().setDAO(paymentDAO);
 
     }
 
-    protected  void outputLoop(){
+    private void outputLoop(){
 
         while(true){
 
@@ -87,7 +87,7 @@ public class MainInputLoop {
 
     }
 
-    protected void loop(){
+    private void loop(){
 
         boolean isWork = true;
         while(isWork) {

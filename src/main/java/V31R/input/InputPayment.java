@@ -39,12 +39,7 @@ public class InputPayment {
 
         if(!PaymentDAOFactory.getInstance().isCurrencyAvailable(currency)){
 
-            throw new PaymentFormatException(
-                    (new StringBuilder()).append("Currency \"")
-                            .append(currency)
-                            .append("\" isn't available.")
-                            .toString()
-            );
+            throw new PaymentFormatException("Currency \"" + currency + "\" isn't available.");
 
         }
 

@@ -21,11 +21,7 @@ public class InputPaymentsFile {
 
             }catch(Exception exception){
 
-                Output.println((new StringBuilder())
-                        .append("Was occurred an error during reading \"")
-                        .append(filename)
-                        .append("\".")
-                        .toString());
+                Output.println("Was occurred an error during reading \"" + filename + "\".");
 
             }
 
