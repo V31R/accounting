@@ -1,12 +1,14 @@
 package V31R.payment;
 
+import java.math.BigDecimal;
+
 public class Payment {
 
     private String currency;
 
-    private Double sum;
+    private BigDecimal sum;
 
-    public Payment(String currency, Double sum) {
+    public Payment(String currency, BigDecimal sum) {
 
         this.currency = currency;
         this.sum = sum;
@@ -25,13 +27,13 @@ public class Payment {
 
     }
 
-    public Double getSum() {
+    public BigDecimal getSum() {
 
         return sum;
 
     }
 
-    public void setSum(Double sum) {
+    public void setSum(BigDecimal sum) {
 
         this.sum = sum;
 
